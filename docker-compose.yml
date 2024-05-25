@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  builder:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: builder
+
+  runner:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: runner
+    ports:
+      - "3030:3000"
