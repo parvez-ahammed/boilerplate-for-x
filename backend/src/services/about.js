@@ -1,0 +1,1 @@
+// any third party call to any service should be done here for About page
