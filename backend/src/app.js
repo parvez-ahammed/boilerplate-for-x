@@ -1,5 +1,6 @@
 const Koa = require('koa');
 const {koaBody} = require('koa-body');
+const cors = require('@koa/cors');
 const router = require('./routes/routes');
 const dotEnv = require('dotenv');
 const errorHandler = require('./handler/error');
@@ -10,6 +11,8 @@ const responseHandler = require('./handler/response');
 dotEnv.config();
 // Create a new Koa application and setup middllewares
 const app = new Koa();
+
+app.use(cors());                                        // Enable CORS for all routes
 app.use(errorHandler);
 app.use(responseHandler());
 app.use(koaBody({includeUnparsed: true}));

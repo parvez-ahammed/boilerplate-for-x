@@ -11,6 +11,7 @@ import {
     useColorModeValue
 } from '@chakra-ui/react';
 import { getAboutData } from '../services/about';
+import { useEffect, useState } from 'react';
 
 const Blob = (props: IconProps) => {
     return (
@@ -33,8 +34,22 @@ interface IntroductionProps {
     id: string
 }
 const Introduction = ({ id }: IntroductionProps) => {
-    const aboutData = getAboutData();
-    
+    const [aboutData, setAboutData] = useState<string>('');
+
+    useEffect(() => {
+        (
+            async () => {
+                try {
+                    const data = await getAboutData();
+                    setAboutData(data);
+
+                } catch (error) {
+                    console.error('Error fetching about data:', error);
+                }
+            }
+        )();
+    }, []);
+
     return (
         <Box id={id} maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
             <Stack
@@ -68,7 +83,7 @@ const Introduction = ({ id }: IntroductionProps) => {
                         </Text>
                     </Heading>
                     <Text color={'gray.500'}>
-                    {aboutData}
+                        {aboutData}
                     </Text>
                     <Stack spacing={{ base: 4, sm: 6 }} direction={{ base: 'column', sm: 'row' }}>
                         <Button
