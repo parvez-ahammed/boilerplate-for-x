@@ -1,0 +1,17 @@
+{
+  "name": "middy-dynamodb-crud",
+  "version": "1.0.0",
+  "description": "A simple serverless application using Middy middleware",
+  "main": "index.js",
+  "type": "module",
+  "keywords": [],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Parvez Ahammed",
+  "license": "ISC",
+  "dependencies": {
+    "@middy/core": "^5.4.0",
+    "@middy/http-router": "^5.4.0"
+  }
+}
