@@ -3,5 +3,8 @@
     "singleQuote": true,
     "trailingComma": "es5",
     "printWidth": 80,
-    "tabWidth": 4
+    "tabWidth": 4,
+    "importOrder": ["pages/", "components/", "features/", "^../(.*)$", "^[./]"],
+    "importOrderSeparation": true,
+    "importOrderSortSpecifiers": true
 }
