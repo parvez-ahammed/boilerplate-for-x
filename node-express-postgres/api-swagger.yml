@@ -1,0 +1,178 @@
+openapi: 3.0.0
+info:
+    title: DEV Jots API
+    version: 1.0.0
+    description: |
+        Only one authentication method is supported:
+        - **JWT bearer token**: A valid sign-in to the `/auth/login` will generate a valid authentication token.
+servers:
+    - url: '{server}/api/v1/'
+      variables:
+          server:
+              default: http://localhost:3000
+paths:
+    /auth/login:
+        post:
+            summary: Login with email and password
+            tags:
+                - Auth
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                email:
+                                    type: string
+                                    format: email
+                                password:
+                                    type: string
+                            required:
+                                - email
+                                - password
+            responses:
+                '200':
+                    description: Successfully logged in
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    token:
+                                        type: string
+                '400':
+                    description: Bad request (validation error)
+
+    /users:
+        post:
+            summary: Create a new user
+            tags:
+                - User
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                username:
+                                    type: string
+                                email:
+                                    type: string
+                                    format: email
+                                password:
+                                    type: string
+                            required:
+                                - username
+                                - email
+                                - password
+            responses:
+                '201':
+                    description: User created successfully
+                '400':
+                    description: Invalid input
+
+        get:
+            summary: Get all users
+            tags:
+                - User
+            security:
+                - bearerAuth: []
+            responses:
+                '200':
+                    description: List of all users
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: object
+                                    properties:
+                                        id:
+                                            type: string
+                                        username:
+                                            type: string
+                                        email:
+                                            type: string
+
+    /users/{id}:
+        get:
+            summary: Get a specific user by ID
+            tags:
+                - User
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                '200':
+                    description: User retrieved successfully
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    id:
+                                        type: string
+                                    username:
+                                        type: string
+                                    email:
+                                        type: string
+                '404':
+                    description: User not found
+
+        patch:
+            summary: Update a specific user by ID
+            tags:
+                - User
+            security:
+                - bearerAuth: []
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                      type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                username:
+                                    type: string
+                                email:
+                                    type: string
+                                password:
+                                    type: string
+            responses:
+                '200':
+                    description: User updated successfully
+                '404':
+                    description: User not found
+
+        delete:
+            summary: Delete a specific user by ID
+            tags:
+                - User
+            security:
+                - bearerAuth: []
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                '200':
+                    description: User deleted successfully
+                '404':
+                    description: User not found
+
+components:
+    securitySchemes:
+        bearerAuth:
+            type: http
+            scheme: bearer
+            bearerFormat: JWT
