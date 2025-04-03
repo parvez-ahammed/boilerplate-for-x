@@ -3,7 +3,7 @@ services:
         image: postgres:17.2-alpine
         container_name: ${PROJECT_NAME}-db
         networks:
-            - dev-jots-net
+            - ${PROJECT_NAME}-net
         ports:
             - '${DB_PORT}:5432'
         environment:
@@ -24,7 +24,7 @@ services:
             dockerfile: Dockerfile
         container_name: ${PROJECT_NAME}-app
         networks:
-            - dev-jots-net
+            - ${PROJECT_NAME}-net
         ports:
             - '${PORT}:3000'
         environment:
@@ -41,7 +41,7 @@ services:
                 condition: service_healthy
 
 networks:
-    dev-jots-net:
+    ${PROJECT_NAME}-net:
         driver: bridge
 
 volumes:

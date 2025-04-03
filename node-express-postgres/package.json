@@ -1,5 +1,5 @@
 {
-    "name": "dev-jots-backend",
+    "name": "node-express-postgres-boilerplate-backend",
     "version": "1.0.0",
     "description": "A blog webapp that allows users to write down their thoughts quickly and interact with others through a simple web application.",
     "main": "index.js",
@@ -13,18 +13,10 @@
         "prepare": "husky",
         "test": "jest --coverage"
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/parvez-ahammed/dev-jots-backend.git"
-    },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "type": "commonjs",
-    "bugs": {
-        "url": "https://github.com/parvez-ahammed/dev-jots-backend/issues"
-    },
-    "homepage": "https://github.com/parvez-ahammed/dev-jots-backend#readme",
     "devDependencies": {
         "@eslint/js": "^9.19.0",
         "@types/bcryptjs": "^2.4.6",
